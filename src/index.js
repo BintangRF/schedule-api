@@ -25,7 +25,12 @@ app.get("/", (req, res) => {
   res.send("School Schedules API is running");
 });
 
-mongoose.connect(process.env.MONGO_URI).then(() => {
-  console.log("MongoDB connected");
-  app.listen(process.env.PORT, () => console.log("Server running"));
-});
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB connected");
+    app.listen(process.env.PORT, "0.0.0.0", () =>
+      console.log("Server running")
+    );
+  })
+  .catch((err) => console.error("MongoDB connection error:", err));
